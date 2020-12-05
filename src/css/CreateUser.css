@@ -3,6 +3,7 @@
     font-family:"Open Sans", sans-serif ;
 }
 #addButton{
+    z-index: 99;
     margin-top:25px;
     background-color: #F1C653;
     width: 100%;

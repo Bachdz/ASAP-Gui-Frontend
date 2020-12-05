@@ -4,23 +4,37 @@ import CreateUser from './CreateUser';
 import CloseIcon from '@material-ui/icons/Close';
 
 import '../css/Login.css';
+import axios from 'axios';
 class Login extends Component {
     state = {
-        peers: [
-            {name: "Bach"},
-            {name: "Alice"},
-            {name: "Bob"}
-        ]
+        peers: []
+    }
+
+    componentDidMount() {
+        axios.get('http://localhost:8080/api/v1/asap/peers')
+        .then(res => this.setState({peers: res.data}))
     }
 
     //create User
     addUser = (userName) => {
-        const newUser = {
-            name: userName
-        }
-        this.setState({peers:[...this.state.peers, newUser]})
+        let url = 'http://localhost:8080/api/v1/asap/peer?name='+userName;
+        console.log(url)
+        axios.post(url)
+            .then(res => this.setState({peers:[...this.state.peers, res.data]} ))
     }
 
+    //remove all users
+    removeAllUser  = ()=>  {
+        axios.delete('http://localhost:8080/api/v1/asap/peers')
+            .then(res => {
+                
+              console.log(res);
+
+            }
+        
+        
+        )
+    }
     
     render() { 
         return (
@@ -29,7 +43,7 @@ class Login extends Component {
             <Peer peers={this.state.peers}/>
 
             <div id="remove-peer">
-            <CloseIcon id="remove" /> Remove all peers
+            <CloseIcon id="remove" onClick={this.removeAllUser} /> Remove all peers
             </div>
             <CreateUser addUser= {this.addUser} />
             </div>

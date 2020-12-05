@@ -9,8 +9,7 @@ class Peer extends Component {
     }
 
     render() { 
-        
-        {if (this.props.peers.length >0 ) { 
+        if (this.props.peers.length >0 ) { 
 
 
             return (
@@ -28,13 +27,14 @@ class Peer extends Component {
 
         }     else {
             return (
-                <h1>alo</h1>
+                <h1>There are no peers available</h1>
             )
-        }    }
+        }    
+    }
 
        
                 
-    }
+    
 }
  
 export default Peer ;
