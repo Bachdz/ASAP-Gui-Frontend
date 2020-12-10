@@ -28,6 +28,7 @@ export class CreateUser extends Component {
     };
 
     onChange = (e) => this.setState({ [e.target.name]: e.target.value })
+    
     onSubmit = (e) => {
         if (this.state.username !== '') {
             this.props.addUser(this.state.username);

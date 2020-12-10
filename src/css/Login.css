@@ -6,6 +6,22 @@
 .login-container {
     margin-top:auto;
 }
+.content {
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+    flex-direction: column;
+    background-color: #000000;
+    color: #ffffff;
+    height: 100vh;
+    margin:0;
+  }
+  
+footer {
+   margin-top:auto;
+   width: 100vw;
+  }
+  
 
 
 

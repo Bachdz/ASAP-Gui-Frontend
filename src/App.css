@@ -1,6 +1,11 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
 body {
   font-family: "Open Sans", sans-serif;
+
+}
+
+#box {
+  text-align: center;
 }
 
 .content {
@@ -8,14 +13,12 @@ body {
   margin-top:20px;
   display: flex;              
   align-items: center;
-  text-align: center;
 }
 
 .container {
   display: flex;
   align-items: center; 
   justify-content: center;
-
   flex-direction: column;
   background-color: #000000;
   color: #ffffff;
@@ -28,17 +31,7 @@ footer {
  width: 100vw;
 }
 
-.logo1 {
-  position: relative;
-  width: 100vw;
-}
 
-.logo2 {
-  position: absolute;
-  width: 100vw;
-  left: -21px;
-  bottom: 4px;
-}
 
 #next {
   cursor: "pointer";

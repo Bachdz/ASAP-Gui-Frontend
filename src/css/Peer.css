@@ -6,10 +6,10 @@
 
 }
 #forward {
-    cursor: pointer;
-   font-size: 50px;
-    float: right;
     margin-left:auto;
+    cursor: pointer;
+    font-size: 50px;
+    float: right;
     color: #F1C653;
 }
 #forward:hover {
@@ -20,12 +20,12 @@
   }
 
 .peer-container {
+    /* display: flex; */
     width: 100%;
     border-bottom: 1px solid #aaa;
     padding-bottom:20px;
     margin-top: 20px;
     color: #F1C653;
-    display: flex;
     align-items: center; 
     font-size: 34px;
     animation: fadein 3.5s;
