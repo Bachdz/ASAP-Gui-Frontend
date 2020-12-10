@@ -46,7 +46,7 @@
 
 }
 
-#icon {
+#accountIcon {
     float: left;
     color: #F1C653;
    font-size: 50px;
@@ -65,9 +65,58 @@
    font-size: 40px;
 }
 
-#exit-icon:hover {
+
+#addIcon, #removeIcon {
+    float:right;
+    color: #F1C653;
+    font-size: 30px;
+    margin-right:20px;  
+}
+.icon:hover {
     cursor: pointer;
     -ms-transform: scale(1.2); /* IE 9 */
     -webkit-transform: scale(1.2); /* Safari 3-8 */
     transform: scale(1.2); 
+}
+
+
+.title {
+    display:flex;
+    align-items: center;
+}
+
+
+.parentList {
+    margin-left:10px;
+}
+
+.main-items {
+    font-size: 30px;
+}
+
+#apps {
+    padding-left:50px;
+}
+
+.input {
+    font-style: italic;
+    width: 100%;
+    border:none;
+    outline: none;
+    border-bottom: 2px solid #808080;
+    background: #000000;
+    color: #ffffff;
+    width: 70%;
+    margin-left:45px;
+    font-size:20px;
+}
+
+.add {
+    width: 100%;
+    display:flex;
+    color: #F1C653;
+}
+
+#checkicon {
+    float: right;
 }
