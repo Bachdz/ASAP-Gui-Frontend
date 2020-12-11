@@ -14,6 +14,7 @@ import { withStyles } from '@material-ui/core/styles';
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
 import CheckIcon from '@material-ui/icons/Check';
+import { FreeBreakfastRounded } from '@material-ui/icons';
 
 
 

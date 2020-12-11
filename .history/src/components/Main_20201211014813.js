@@ -64,10 +64,8 @@ class Main extends Component {
         };
 
         const validate = (e) => {
-          
-            if (e.target.value.length === 0) {
-                this.setState({ activateAddApp: false })
-            } else if (e.target.value.length > 0) {
+            if (e.target.value.length > 0) {
+
                 this.setState({ activateAddApp: !this.state.activeAddApp })
             }
         }

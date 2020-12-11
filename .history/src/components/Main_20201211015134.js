@@ -14,6 +14,7 @@ import { withStyles } from '@material-ui/core/styles';
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
 import CheckIcon from '@material-ui/icons/Check';
+import { FreeBreakfastRounded } from '@material-ui/icons';
 
 
 
@@ -67,7 +68,8 @@ class Main extends Component {
           
             if (e.target.value.length === 0) {
                 this.setState({ activateAddApp: false })
-            } else if (e.target.value.length > 0) {
+            }
+            if (e.target.value.length > 0) {
                 this.setState({ activateAddApp: !this.state.activeAddApp })
             }
         }
