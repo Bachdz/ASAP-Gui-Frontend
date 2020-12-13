@@ -1,0 +1,74 @@
+#bar {
+    width: 100vw;
+    background-color: #F1C653;
+    height: 5vh;
+}
+.main {
+    background-color: #000000;
+    color: #ffffff;
+    height: 100vh;
+}
+
+.main-content {
+    display : flex;
+}
+
+.navigation {
+    display: flex;
+    flex-direction: column;
+    width: 25vw;
+    height: 70vh;
+}
+.user-info b {
+    color: #F1C653;
+    margin-left: 10px;
+}
+.user-info {
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    padding:30px 20px;
+  
+    border-bottom: 1px solid #aaa;
+}
+
+.main-screen {
+    width: 50vw;
+    background-color: #ffffff;
+    height: 70vh;
+}
+
+
+.connection-bar {
+    width: 25vw;
+    height: 70vh;
+
+}
+
+#accountIcon {
+    float: left;
+    color: #F1C653;
+   font-size: 50px;
+   margin-right: 10px;
+
+}
+
+.exit {
+    display:flex;
+    align-items: center;
+    float: right;
+    margin-left: auto;
+}
+#exit-icon {
+    color: #F1C653;
+   font-size: 40px;
+}
+
+.icon:hover {
+    cursor: pointer;
+    -ms-transform: scale(1.2); /* IE 9 */
+    -webkit-transform: scale(1.2); /* Safari 3-8 */
+    transform: scale(1.2); 
+}
+
+

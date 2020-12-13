@@ -3,8 +3,8 @@ import React from 'react';
 
 
 import { ReactComponent as Arrow } from './arrow.svg';
-import Login from './components/loginscreen/Login';
-import Main from './components/mainscreen/Main';
+import Login from './components/Login/Login';
+import Main from './components/Main';
 import { Link } from 'react-router-dom';
 import Logo from './components/fragments/Footer';
 
