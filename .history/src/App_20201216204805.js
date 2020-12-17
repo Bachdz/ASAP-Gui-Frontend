@@ -29,7 +29,7 @@ function App() {
             <div className="content">
               <div id="box">
                 <h1>Welcome to ASAP engine</h1>
-                <Link to="/login"><Arrow id="next" onClick={doInitializeApp} /></Link>
+                <Link to="/login"><Arrow id="next" onclick={doInitializeApp} /></Link>
               </div>
             </div>
             <Logo />

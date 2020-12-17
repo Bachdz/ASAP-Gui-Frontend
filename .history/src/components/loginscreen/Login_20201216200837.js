@@ -19,33 +19,20 @@ class Login extends Component {
         peers: [],
         alertopen: false,
         alertmsg: '',
-        alerttype: '',
-        consolelog: []
+        alerttype: ''
     }
 
-
-    getLog = () => {
-        axios.get('http://localhost:8080/api/v1/asap/logdata')
-            .then(res => this.setState({ consolelog: res.data }))
-    }
     componentDidMount() {
         axios.get('http://localhost:8080/api/v1/asap/peers')
             .then(res => this.setState({ peers: res.data }))
-        this.getLog();
-
+        document.getElementsByClassName('i-has-teh-code').scrollTop = 9999999;
     }
 
-    getLog = () => {
-        axios.get('http://localhost:8080/api/v1/asap/logdata')
-            .then(res => this.setState({ consolelog: res.data }))
-    }
     //create User
     addUser = (userName) => {
         let url = 'http://localhost:8080/api/v1/asap/peer?name=' + userName;
         axios.post(url)
-            .then(res => this.setState({ peers: [...this.state.peers, res.data] }, () => this.getLog)
-            )
-
+            .then(res => this.setState({ peers: [...this.state.peers, res.data] }))
     }
 
     //remove all users
@@ -53,12 +40,12 @@ class Login extends Component {
         axios.delete('http://localhost:8080/api/v1/asap/peers')
             .then(res => {
                 if (res.data === false) {
-                    this.setState({ alertopen: !this.state.alertopen, alertmsg: "Couldn't delete peers", alerttype: "error" }, () => this.getLog);
+                    this.setState({ alertopen: !this.state.alertopen, alertmsg: "Couldn't delete peers", alerttype: "error" });
 
                 } else if (res.data === true) {
                     this.setState({ alertopen: !this.state.alertopen, alertmsg: "Deleted successfully ", alerttype: "success" });
                     axios.get('http://localhost:8080/api/v1/asap/peers')
-                        .then(res => this.setState({ peers: res.data }, () => this.getLog))
+                        .then(res => this.setState({ peers: res.data }))
                 }
 
 
@@ -67,7 +54,6 @@ class Login extends Component {
 
 
             )
-        this.getLog();
 
 
     }
@@ -102,7 +88,7 @@ class Login extends Component {
                     </div>
 
                 </div>
-                <Terminal consolelog={this.state.consolelog} />
+                <Terminal />
 
             </div>
 

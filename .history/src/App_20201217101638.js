@@ -14,6 +14,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import './App.css';
 
 const doInitializeApp = () => {
+  console.log("hier");
   axios.get('http://localhost:8080/api/v1/asap/start')
 }
 

@@ -13,8 +13,8 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 import './App.css';
 
-const doInitializeApp = () => {
-  axios.get('http://localhost:8080/api/v1/asap/start')
+doInitializeApp() = {
+  axios.get('http://localhost:8080/api/v1/asap/peers')
 }
 
 
@@ -29,7 +29,7 @@ function App() {
             <div className="content">
               <div id="box">
                 <h1>Welcome to ASAP engine</h1>
-                <Link to="/login"><Arrow id="next" onClick={doInitializeApp} /></Link>
+                <Link to="/login"><Arrow id="next" onclick={this.do} /></Link>
               </div>
             </div>
             <Logo />
