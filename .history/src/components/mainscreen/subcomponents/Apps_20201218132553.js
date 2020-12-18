@@ -101,6 +101,7 @@ class Apps extends Component {
 
                             {
                                 this.props.apps.map((app) => (
+
                                     <ListItem selected={selectedIndex === 0} onClick={(event) => handleListItemClick(event, 0)} button id="apps" >
                                         <ListItemText primary={app.name} />
                                     </ListItem>

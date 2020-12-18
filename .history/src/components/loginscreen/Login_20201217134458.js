@@ -4,6 +4,7 @@ import CreateUser from './subcomponents/CreateUser';
 import CloseIcon from '@material-ui/icons/Close';
 import Alert from '@material-ui/lab/Alert';
 import Snackbar from '@material-ui/core/Snackbar';
+import Logo from '../fragments/Footer';
 import Terminal from '../fragments/Terminal';
 
 
@@ -13,7 +14,7 @@ import axios from 'axios';
 
 
 
-class Login extends React.Component {
+class Login extends Component {
     state = {
         peers: [],
         alertopen: false,
@@ -35,15 +36,17 @@ class Login extends React.Component {
         }, 2000);
 
 
-
     }
 
-
+    getLog = () => {
+        axios.get('http://localhost:8080/api/v1/asap/logdata')
+            .then(res => this.setState({ consolelog: res.data }))
+    }
     //create User
     addUser = (userName) => {
         let url = 'http://localhost:8080/api/v1/asap/peer?name=' + userName;
         axios.post(url)
-            .then(res => this.setState({ peers: [...this.state.peers, res.data] }, () => this.getLog())
+            .then(res => this.setState({ peers: [...this.state.peers, res.data] }, () => this.getLog)
             )
 
     }
@@ -53,12 +56,12 @@ class Login extends React.Component {
         axios.delete('http://localhost:8080/api/v1/asap/peers')
             .then(res => {
                 if (res.data === false) {
-                    this.setState({ alertopen: !this.state.alertopen, alertmsg: "Couldn't delete peers", alerttype: "error" }, () => this.getLog());
+                    this.setState({ alertopen: !this.state.alertopen, alertmsg: "Couldn't delete peers", alerttype: "error" }, () => this.getLog);
 
                 } else if (res.data === true) {
                     this.setState({ alertopen: !this.state.alertopen, alertmsg: "Deleted successfully ", alerttype: "success" });
                     axios.get('http://localhost:8080/api/v1/asap/peers')
-                        .then(res => this.setState({ peers: res.data }, () => this.getLog()))
+                        .then(res => this.setState({ peers: res.data }, () => this.getLog))
                 }
 
 
@@ -67,7 +70,7 @@ class Login extends React.Component {
 
 
             )
-
+        this.getLog();
 
 
     }

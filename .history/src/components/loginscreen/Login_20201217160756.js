@@ -5,6 +5,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import Alert from '@material-ui/lab/Alert';
 import Snackbar from '@material-ui/core/Snackbar';
 import Terminal from '../fragments/Terminal';
+import ReactDOM from 'react-dom';
 
 
 

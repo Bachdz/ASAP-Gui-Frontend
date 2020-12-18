@@ -38,11 +38,8 @@ class Apps extends Component {
         const { classes } = this.props;
 
         const handleClick = (event, index) => {
-            this.setState({ open: !this.state.open });
+            this.setState({ open: !this.state.open, setSelectedIndex: index });
 
-        };
-        const handleListItemClick = (event, index) => {
-            this.setState({ setSelectedIndex: index })
         };
 
         const validate = (e) => {
@@ -63,7 +60,7 @@ class Apps extends Component {
             <div>
                 <List>
                     <div className="title">
-                        <ListItem button onClick={handleClick}>
+                        <ListItem button selected={selectedIndex === 0} onClick={(event) => handleClick(event, 0)}>
                             {open ? <ExpandLess /> : <ExpandMore />}
                             <ListItemText primary="Apps" classes={{ primary: classes.listItemText }} className='parentList' />
                         </ListItem>
@@ -101,7 +98,8 @@ class Apps extends Component {
 
                             {
                                 this.props.apps.map((app) => (
-                                    <ListItem selected={selectedIndex === 0} onClick={(event) => handleListItemClick(event, 0)} button id="apps" >
+
+                                    <ListItem button id="apps" >
                                         <ListItemText primary={app.name} />
                                     </ListItem>
 

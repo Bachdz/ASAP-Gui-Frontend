@@ -4,6 +4,7 @@ import CreateUser from './subcomponents/CreateUser';
 import CloseIcon from '@material-ui/icons/Close';
 import Alert from '@material-ui/lab/Alert';
 import Snackbar from '@material-ui/core/Snackbar';
+import Logo from '../fragments/Footer';
 import Terminal from '../fragments/Terminal';
 
 
@@ -13,7 +14,7 @@ import axios from 'axios';
 
 
 
-class Login extends React.Component {
+class Login extends Component {
     state = {
         peers: [],
         alertopen: false,
@@ -35,7 +36,6 @@ class Login extends React.Component {
         }, 2000);
 
 
-
     }
 
 
@@ -53,7 +53,7 @@ class Login extends React.Component {
         axios.delete('http://localhost:8080/api/v1/asap/peers')
             .then(res => {
                 if (res.data === false) {
-                    this.setState({ alertopen: !this.state.alertopen, alertmsg: "Couldn't delete peers", alerttype: "error" }, () => this.getLog());
+                    this.setState({ alertopen: !this.state.alertopen, alertmsg: "Couldn't delete peers", alerttype: "error" }, () => this.getLog);
 
                 } else if (res.data === true) {
                     this.setState({ alertopen: !this.state.alertopen, alertmsg: "Deleted successfully ", alerttype: "success" });
@@ -67,7 +67,7 @@ class Login extends React.Component {
 
 
             )
-
+        this.getLog();
 
 
     }

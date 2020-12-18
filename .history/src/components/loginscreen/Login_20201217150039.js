@@ -13,7 +13,7 @@ import axios from 'axios';
 
 
 
-class Login extends React.Component {
+class Login extends Component {
     state = {
         peers: [],
         alertopen: false,
@@ -31,7 +31,10 @@ class Login extends React.Component {
         setTimeout(() => {
             axios.get('http://localhost:8080/api/v1/asap/peers')
                 .then(res => this.setState({ peers: res.data }))
-            this.getLog();
+            this.getLog(), () => {
+                var objDiv = document.getElementsByClassName("i-has-teh-code");
+                objDiv.scrollTop = objDiv.scrollHeight;
+            };
         }, 2000);
 
 

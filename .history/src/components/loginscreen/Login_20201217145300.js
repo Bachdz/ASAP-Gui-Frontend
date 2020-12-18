@@ -13,7 +13,7 @@ import axios from 'axios';
 
 
 
-class Login extends React.Component {
+class Login extends Component {
     state = {
         peers: [],
         alertopen: false,
@@ -33,7 +33,6 @@ class Login extends React.Component {
                 .then(res => this.setState({ peers: res.data }))
             this.getLog();
         }, 2000);
-
 
 
     }

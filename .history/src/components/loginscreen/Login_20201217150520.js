@@ -13,7 +13,7 @@ import axios from 'axios';
 
 
 
-class Login extends React.Component {
+class Login extends Component {
     state = {
         peers: [],
         alertopen: false,
@@ -25,7 +25,7 @@ class Login extends React.Component {
 
     getLog = () => {
         axios.get('http://localhost:8080/api/v1/asap/logdata')
-            .then(res => this.setState({ consolelog: res.data }))
+            .then(res => this.setState({ consolelog: res.data }), () => this.scrollBottom)
     }
     componentDidMount() {
         setTimeout(() => {
@@ -37,7 +37,10 @@ class Login extends React.Component {
 
 
     }
-
+    scrollBottom = () => {
+        var objDiv = document.getElementsByClassName("i-has-teh-code");
+        objDiv.scrollTop = objDiv.scrollHeight;
+    }
 
     //create User
     addUser = (userName) => {
