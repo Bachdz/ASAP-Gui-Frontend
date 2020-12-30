@@ -1,0 +1,9 @@
+.messages-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.box {
+    margin-top: auto;
+}

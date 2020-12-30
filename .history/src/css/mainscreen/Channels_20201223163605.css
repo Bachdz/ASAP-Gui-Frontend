@@ -1,0 +1,37 @@
+.channels-container {
+    margin-top: 0;
+}
+
+.channel-list {
+    height: 200px;
+    overflow-y: scroll;
+}
+
+#channels {
+    padding-left:50px;
+}
+
+.information {
+    margin: 0 0 0 50px;
+    font-size: 16px;
+    font-style: italic;
+    color: #808080;
+}
+
+.add {
+    width: 100%;
+    color: #F1C653;
+}
+
+.input {
+    font-style: italic;
+    width: 100%;
+    border:none;
+    outline: none;
+    border-bottom: 2px solid #808080;
+    background: #000000;
+    color: #ffffff;
+    width: 70%;
+    margin-left:45px;
+    font-size:20px;
+}

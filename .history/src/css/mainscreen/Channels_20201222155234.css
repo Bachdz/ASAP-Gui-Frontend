@@ -1,0 +1,12 @@
+.channels-container {
+    margin-top: 0;
+}
+
+.channel-list {
+    height: 200px;
+    overflow-y: scroll;
+}
+
+#channels {
+    padding-left:50px;
+}
