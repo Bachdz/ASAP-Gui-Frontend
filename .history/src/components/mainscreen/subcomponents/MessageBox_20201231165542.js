@@ -30,7 +30,7 @@ export default function MessageBox(props) {
                     <textarea type="text" class="message-input" placeholder="Type message..." onChange={props.getMessValue} onKeyDown={onEnterPress}></textarea>
 
                 } */}
-                <textarea value={textt} name="1" type="text" class="message-input" placeholder="Type message..." onChange={(e) => setText(e.target.value)} onKeyDown={keyD}></textarea>
+                <textarea value={textt} name="1" type="text" class="message-input" placeholder="Type message..." onChange={textOnChange} onKeyDown={keyD}></textarea>
 
                 <button type="submit" class="message-submit" >Add</button>
             </form>

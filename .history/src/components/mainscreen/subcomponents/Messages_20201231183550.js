@@ -36,10 +36,11 @@ class Messages extends Component {
                 res.data === null ?
                     this.setState({ alertopen: !this.state.alertopen, alertmsg: "Something went wrong: Couldn't add message", alerttype: "error" })
                     :
-                    this.setState({ alertopen: !this.state.alertopen, alertmsg: "Message added successfully ", alerttype: "success", content: [...this.state.content, res.data.mess], messValue: '' })
+                    this.setState({ alertopen: !this.state.alertopen, alertmsg: "Message added successfully ", alerttype: "success", content: [...this.state.content, res.data] })
             })
 
 
+        this.setState({ messValue: '' })
     }
     render() {
 
@@ -50,7 +51,7 @@ class Messages extends Component {
         }
         return (
             <div className="messages-container">
-                <Snackbar anchorOrigin={{ vertical: 'top', horizontal: 'center' }} open={alertopen} autoHideDuration={1000} onClose={handleClose}>
+                <Snackbar anchorOrigin={{ vertical: 'top', horizontal: 'center' }} open={alertopen} autoHideDuration={2000} onClose={this.handleClose}>
                     <Alert onClose={handleClose} severity={alerttype}>
                         {alertmsg}
                     </Alert>

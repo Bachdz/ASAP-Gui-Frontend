@@ -1,16 +1,15 @@
 import React, { Component } from 'react'
 import '../../../css/mainscreen/Messages.css';
-import Snackbar from '@material-ui/core/Snackbar';
-import Alert from '@material-ui/lab/Alert';
+import MessageBox from './MessageBox';
+
 import axios from 'axios';
+import { Message } from '@material-ui/icons';
 
 class Messages extends Component {
     state = {
         content: [],
         messValue: '',
-        alertopen: false,
-        alertmsg: '',
-        alerttype: '',
+        input: ''
     }
 
     componentDidMount() {
@@ -26,35 +25,11 @@ class Messages extends Component {
 
     createNewMess = (e) => {
         e.preventDefault();
-        let obj = {
-            mess: this.state.messValue,
-        };
-
-        let url = 'http://localhost:8080/api/v1/asap/addmessages?peer=' + this.props.userName + '&app=' + this.props.appSelected + '&uri=' + this.props.channelUriSelected;
-        axios.post(url, obj)
-            .then(res => {
-                res.data === null ?
-                    this.setState({ alertopen: !this.state.alertopen, alertmsg: "Something went wrong: Couldn't add message", alerttype: "error" })
-                    :
-                    this.setState({ alertopen: !this.state.alertopen, alertmsg: "Message added successfully ", alerttype: "success", content: [...this.state.content, res.data.mess], messValue: '' })
-            })
-
-
+        console.log(this.state.messValue)
     }
     render() {
-
-        const { alertmsg, alertopen, alerttype } = this.state;
-
-        const handleClose = (event, reason) => {
-            this.setState({ alertopen: !this.state.alertopen });
-        }
         return (
             <div className="messages-container">
-                <Snackbar anchorOrigin={{ vertical: 'top', horizontal: 'center' }} open={alertopen} autoHideDuration={1000} onClose={handleClose}>
-                    <Alert onClose={handleClose} severity={alerttype}>
-                        {alertmsg}
-                    </Alert>
-                </Snackbar>
                 <div className="mess">
                     {this.state.content.length > 0 ?
                         <div>
@@ -73,7 +48,7 @@ class Messages extends Component {
                     <div class="message-box">
 
                         <form onSubmit={this.createNewMess}>
-                            <input type="text" value={this.state.messValue} class="message-input" placeholder="Type message..." onChange={(e) => this.setState({ messValue: e.target.value })}></input>
+                            <input type="text" value={this.state.input} class="message-input" placeholder="Type message..." onChange={(e) => this.setState({ messValue: e.target.value })}></input>
 
                             <button type="submit" class="message-submit" >Add</button>
                         </form>

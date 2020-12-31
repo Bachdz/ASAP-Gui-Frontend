@@ -15,6 +15,7 @@ export default function MessageBox(props) {
         console.log('val', textt);
     }
     const keyD = (e) => {
+        console.log(e.target.value, textt)
         if (e.keyCode === 13 && e.shiftKey === false) {
             setText('')
         }

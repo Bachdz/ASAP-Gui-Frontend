@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 export default function MessageBox(props) {
 
-    const [textt, setText] = useState('default')
+    const [text, setText] = useState('default')
 
     const onEnterPress = (e) => {
         if (e.keyCode === 13 && e.shiftKey === false) {
@@ -11,13 +11,10 @@ export default function MessageBox(props) {
         }
     }
     const textOnChange = (e) => {
-        setText(setText(e.target.value));
-        console.log('val', textt);
+        console.log('val', e.target.value);
     }
     const keyD = (e) => {
-        if (e.keyCode === 13 && e.shiftKey === false) {
-            setText('')
-        }
+        setText('');
     }
 
     return (
@@ -30,7 +27,7 @@ export default function MessageBox(props) {
                     <textarea type="text" class="message-input" placeholder="Type message..." onChange={props.getMessValue} onKeyDown={onEnterPress}></textarea>
 
                 } */}
-                <textarea value={textt} name="1" type="text" class="message-input" placeholder="Type message..." onChange={(e) => setText(e.target.value)} onKeyDown={keyD}></textarea>
+                <textarea value={text} name="1" type="text" class="message-input" placeholder="Type message..." onChange={textOnChange} onKeyDown={keyD}></textarea>
 
                 <button type="submit" class="message-submit" >Add</button>
             </form>

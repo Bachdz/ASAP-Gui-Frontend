@@ -50,7 +50,7 @@ class Messages extends Component {
         }
         return (
             <div className="messages-container">
-                <Snackbar anchorOrigin={{ vertical: 'top', horizontal: 'center' }} open={alertopen} autoHideDuration={1000} onClose={handleClose}>
+                <Snackbar anchorOrigin={{ vertical: 'top', horizontal: 'center' }} open={alertopen} autoHideDuration={2000} onClose={this.handleClose}>
                     <Alert onClose={handleClose} severity={alerttype}>
                         {alertmsg}
                     </Alert>
