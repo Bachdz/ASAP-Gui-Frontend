@@ -1,0 +1,29 @@
+.connection-menu{
+    display: flex;
+    flex-direction: column;
+}
+
+.connection {
+    display: flex;
+    flex-direction: column;
+    height: 70%;
+}
+
+.setting {
+    height: 30%;
+}
+
+#icon {
+    float: left;
+    color: #F1C653;
+   font-size: 50px;
+   margin-right: 10px;
+
+}
+#title {
+    color: #F1C653;
+    font-size: 30px;
+    display: flex;
+    align-items:center;
+    justify-content: center;
+}
