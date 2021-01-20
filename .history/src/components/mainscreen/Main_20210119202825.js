@@ -168,6 +168,7 @@ class Main extends Component {
                             onMessage={(msg) => {
                                 console.log(msg);
                                 let message = "Received new chunk from: " + msg.sender + " at : " + msg.format + " | channel: " + msg.uri + " | era: " + msg.era
+
                                 const action = key => (
                                     <Fragment>
                                         <IconButton size="small" aria-label="close" color="inherit" onClick={() => { this.props.closeSnackbar(key) }}>
@@ -175,6 +176,7 @@ class Main extends Component {
                                         </IconButton>
                                     </Fragment>
                                 );
+
                                 this.props.enqueueSnackbar(message, {
                                     anchorOrigin: {
                                         vertical: 'top',

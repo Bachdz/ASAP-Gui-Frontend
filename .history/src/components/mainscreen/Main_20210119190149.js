@@ -1,21 +1,16 @@
-import React, { Fragment, Component } from 'react'
+import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { Link } from 'react-router-dom';
 import SockJsClient from 'react-stomp';
-
-
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
 
 
 import Apps from './subcomponents/Apps';
 import axios from 'axios';
 import Snackbar from '@material-ui/core/Snackbar';
-import { withSnackbar } from 'notistack';
-
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
-
 import Alert from '@material-ui/lab/Alert';
 import Terminal from '../fragments/Terminal';
 import Messages from './subcomponents/Messages';
@@ -74,8 +69,6 @@ class Main extends Component {
         axios.get('http://localhost:8080/api/v1/asap/storages?peer=' + this.state.username)
             .then(res => this.setState({ apps: res.data }))
         this.getLog();
-
-
     }
 
     getLog = () => {
@@ -105,7 +98,6 @@ class Main extends Component {
             return <Redirect to="/login" />;
         } else {
             return (
-
                 <div class="main">
                     <Snackbar anchorOrigin={{ vertical: 'top', horizontal: 'center' }} open={alertopen} autoHideDuration={2000} onClose={this.handleClose}>
                         <Alert onClose={this.handleClose} severity={alerttype}>
@@ -115,6 +107,28 @@ class Main extends Component {
 
 
 
+                    {
+                        this.state.notify.length > 0 ?
+                            this.state.notify.map((notifyObj, index) => {
+
+                                <Snackbar anchorOrigin={{ vertical: 'top', horizontal: 'center' }} open={notifyObj.isNew} onClose={this.handleCloseNotify}
+                                    message={"Received new chunk from: " + notifyObj.sender + " at : " + notifyObj.format + " | channel: " + notifyObj.uri + " | era: " + notifyObj.era}
+                                    action={
+                                        <React.Fragment>
+                                            <IconButton size="small" aria-label="close" color="inherit" onClick={this.handleCloseNotify}>
+                                                <CloseIcon fontSize="small" />
+                                            </IconButton>
+                                        </React.Fragment>
+                                    }
+                                />
+
+
+
+                            })
+                            : null
+
+
+                    }
 
 
 
@@ -167,22 +181,8 @@ class Main extends Component {
 
                             onMessage={(msg) => {
                                 console.log(msg);
-                                let message = "Received new chunk from: " + msg.sender + " at : " + msg.format + " | channel: " + msg.uri + " | era: " + msg.era
-                                const action = key => (
-                                    <Fragment>
-                                        <IconButton size="small" aria-label="close" color="inherit" onClick={() => { this.props.closeSnackbar(key) }}>
-                                            <CloseIcon fontSize="small" />
-                                        </IconButton>
-                                    </Fragment>
-                                );
-                                this.props.enqueueSnackbar(message, {
-                                    anchorOrigin: {
-                                        vertical: 'top',
-                                        horizontal: 'center',
-                                    },
-                                    persist: true,
-                                    action
-                                });
+                                let string = "Received new chunk from: " + msg.sender + " at : " + msg.format + " | channel: " + msg.uri + " | era: " + msg.era
+                                this.setState({ notifymsg: string, notifyopen: true })
                             }}
                             ref={(client) => { this.clientRef = client }} />
 
@@ -190,7 +190,6 @@ class Main extends Component {
                     <Terminal consolelog={this.state.consolelog} />
 
                 </div>
-
             );
         }
 
@@ -202,4 +201,4 @@ class Main extends Component {
 
 
 
-export default withSnackbar(Main);
+export default Main;
