@@ -17,9 +17,6 @@ export default class Terminal extends Component {
 
     componentDidMount() {
         this.getLog();
-        this.interval = setInterval(async () => {
-            await this.getLog();
-        }, 1000); // every one second
     }
 
     componentDidUpdate() {
@@ -28,24 +25,16 @@ export default class Terminal extends Component {
         })
 
     }
-    componentWillUnmount() {
-        clearInterval(this.interval);
-    }
+
 
     getLog = () => {
-        console.log("Asking for log data")
         axios.get('http://localhost:8080/api/v1/asap/logdata')
-            .then(res => {
-                if (res.data.length > this.state.log.length) {
-                    this.setState({ log: res.data })
-
-                }
-            })
+            .then(res => this.setState({ log: res.data }))
     }
     render() {
         return (
-            <div className="console" >
-                <div className="i-has-teh-code" id="scroll-terminal" >
+            <div className="console" id="scroll-terminal">
+                <div className="i-has-teh-code" >
                     {this.state.log.map((string) => (
 
                         <p>{string}</p>

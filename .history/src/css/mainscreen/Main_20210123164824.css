@@ -41,12 +41,6 @@
 }
 
 
-.console-main {
-    background: rgba(20, 20, 30, 0.8);
-    padding: 0.3em;
-    height: 24vh;
-}
-
 .connection-bar {
     width: 25vw;
     height: 70vh;

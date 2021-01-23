@@ -33,7 +33,7 @@ export default class Terminal extends Component {
     }
 
     getLog = () => {
-        console.log("Asking for log data")
+        console.log("getting log")
         axios.get('http://localhost:8080/api/v1/asap/logdata')
             .then(res => {
                 if (res.data.length > this.state.log.length) {

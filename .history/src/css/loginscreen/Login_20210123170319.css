@@ -1,13 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
 
 
-.console-login {
-  
-  background: rgba(20, 20, 30, 0.8);
-  padding: 0.3em;
-  height: 29vh;
 
-}
 .content {
     display: flex;
     align-items: center; 

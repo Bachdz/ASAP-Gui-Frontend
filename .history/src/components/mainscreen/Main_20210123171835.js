@@ -38,6 +38,7 @@ class Main extends Component {
         alerttype: '',
         channelSelected: false,
         appSelected: false,
+        consolelog: [],
         appSelectedName: '',
         channelUriSelected: '',
 
@@ -72,10 +73,15 @@ class Main extends Component {
 
         axios.get('http://localhost:8080/api/v1/asap/storages?peer=' + this.state.username)
             .then(res => this.setState({ apps: res.data }))
+        this.getLog();
 
 
     }
 
+    getLog = () => {
+        axios.get('http://localhost:8080/api/v1/asap/logdata')
+            .then(res => this.setState({ consolelog: res.data }))
+    }
 
 
     handleClose = (event, reason) => {

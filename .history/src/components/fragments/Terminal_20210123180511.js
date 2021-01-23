@@ -17,8 +17,8 @@ export default class Terminal extends Component {
 
     componentDidMount() {
         this.getLog();
-        this.interval = setInterval(async () => {
-            await this.getLog();
+        this.interval = setInterval(() => {
+            this.getLog();
         }, 1000); // every one second
     }
 
@@ -33,14 +33,8 @@ export default class Terminal extends Component {
     }
 
     getLog = () => {
-        console.log("Asking for log data")
         axios.get('http://localhost:8080/api/v1/asap/logdata')
-            .then(res => {
-                if (res.data.length > this.state.log.length) {
-                    this.setState({ log: res.data })
-
-                }
-            })
+            .then(res => this.setState({ log: res.data }))
     }
     render() {
         return (

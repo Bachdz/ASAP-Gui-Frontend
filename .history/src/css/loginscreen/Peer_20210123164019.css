@@ -22,7 +22,6 @@
 .peer-container {
   max-height:350px;
   overflow-y: auto;
-  overflow-x: hidden;
 }
 
 

@@ -50,7 +50,7 @@
   bottom: 0em;
   left: 0em;
   content: '■';
-  /* padding: 1em; */
+  padding: 1em;
   -webkit-animation-name: waiting;
           animation-name: waiting;
   -webkit-animation-duration: 1200ms;

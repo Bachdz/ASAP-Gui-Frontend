@@ -9,7 +9,7 @@ function Peer(props) {
 
     if (props.peers.length > 0) {
         return (
-            <div className="peer-container" id="scroll-peers">
+            <div className="peer-container">
                 {
                     props.peers.map((peer) => (
                         <div id="peer">
