@@ -1,4 +1,4 @@
-This project is the frontend part of an application. It is create to demonstrate the usability of ASAP Framework, which was initiated by Thomas Schwotzer: https://github.com/SharedKnowledge/ASAPJava
+This project is the frontend part of an application. It is created to demonstrate the usability of ASAP Framework, which was initiated by Thomas Schwotzer: https://github.com/SharedKnowledge/ASAPJava
 
 ## Available Scripts
 
