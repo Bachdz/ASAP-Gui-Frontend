@@ -88,7 +88,7 @@ class Channels extends Component {
     render() {
         const { open, openAddChannel, activateAddChannel, alertmsg, alertopen, alerttype, selectedIndex, deselect, channelSelected } = this.state;
         const { classes } = this.props;
-        const channelListener = "/app/channel/" + this.props.appName;
+        const channelListener = "/app/" + this.props.appName;
 
         const handleClick = (event, index) => {
             this.setState({ open: !this.state.open });

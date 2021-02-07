@@ -15,16 +15,16 @@ b {
 
 #era {
 text-align: center;
-font-size: 16px;
-color:rgb(83, 83, 83);
+font-size: 20px;
+color:#333;
 font-weight: bold;
-border-bottom: 0.5mm solid;
 
 }
 .mess {
   display:flex;
   padding: 10px 20px 20px 40px;
   height: 85%;
+  border-bottom: double;
 }
 
 .received {

@@ -87,7 +87,7 @@ class Messages extends Component {
                         <div className="mess-content" id="scroll-received">
                             <b>  {this.props.userName}</b>
                             {this.state.content.map((content) => (
-                                <Tooltip title={"ASAP-Chunk | Era " + content.era} placement="right">
+                                <Tooltip title={"ASAP-Chunk | Era " + content.era}>
 
                                     <div id="self-mess">
 
@@ -129,33 +129,31 @@ class Messages extends Component {
                                         <b id="sender">{content.sender}</b>
 
                                         {content.chunk.map((chunk) =>
-
-                                            <Tooltip title={"ASAP-Chunk | Era " + chunk.era} placement="left">
-                                                <div id="received-mess">
+                                            <div id="received-mess">
 
 
 
-                                                    <div id="era">    Era {chunk.era}</div>
+                                                <div id="era">    Era {chunk.era}</div>
 
 
-                                                    {chunk.messages.map((mess) => (
-                                                        <p>
-                                                            <p> {mess}</p>
-                                                        </p>
+                                                {chunk.messages.map((mess) => (
+                                                    <p>
+                                                        <p> {mess}</p>
+                                                    </p>
 
 
 
-                                                    ))}
+                                                ))}
 
 
 
 
 
 
-                                                </div>
+                                            </div>
 
 
-                                            </Tooltip>
+
 
 
 

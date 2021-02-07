@@ -14,8 +14,6 @@ import Snackbar from '@material-ui/core/Snackbar';
 import Alert from '@material-ui/lab/Alert';
 import Tooltip from '@material-ui/core/Tooltip';
 import '../../../css/mainscreen/Channels.css';
-import SockJsClient from 'react-stomp';
-
 
 const styles = theme => ({
     listItemText: {
@@ -55,13 +53,21 @@ class Channels extends Component {
 
     componentDidMount() {
         this.getChannel();
+        this.getEra();
     }
 
-    getChannel() {
+    getChannel = () => {
         axios.get('http://localhost:8080/api/v1/asap/channels?peer=' + this.props.username + '&storage=' + this.props.appName)
             .then(res => this.setState({ channels: res.data }))
     }
 
+
+    getEra = () => {
+        axios.get('http://localhost:8080/api/v1/asap/era?peer=' + this.props.username + '&storage=' + this.props.appName)
+            .then(res => {
+                this.setState({ currentEra: res.data })
+            })
+    }
 
 
 
@@ -88,7 +94,6 @@ class Channels extends Component {
     render() {
         const { open, openAddChannel, activateAddChannel, alertmsg, alertopen, alerttype, selectedIndex, deselect, channelSelected } = this.state;
         const { classes } = this.props;
-        const channelListener = "/app/channel/" + this.props.appName;
 
         const handleClick = (event, index) => {
             this.setState({ open: !this.state.open });
@@ -142,6 +147,11 @@ class Channels extends Component {
                         {alertmsg}
                     </Alert>
                 </Snackbar>
+
+
+                <ListItem>
+                    <ListItemText classes={{ primary: classes.listItemText }} primary={"Current Era: " + this.state.currentEra} className='parentList' />
+                </ListItem>
                 <div className="title">
 
                     < ListItem button onClick={handleClick}>
@@ -151,9 +161,7 @@ class Channels extends Component {
 
                     {
                         openAddChannel ?
-                            <Tooltip title="Close">
-                                <RemoveIcon id="removeIcon" className="icon" onClick={toggleCreateNewChannel} />
-                            </Tooltip>
+                            <RemoveIcon id="removeIcon" className="icon" onClick={toggleCreateNewChannel} />
                             :
                             <Tooltip title="Add new channel">
                                 <AddIcon id="addIcon" className="icon" onClick={toggleCreateNewChannel} />
@@ -196,6 +204,8 @@ class Channels extends Component {
                                         <ListItem selected={selectedIndex === index && deselect === true} className={selectedIndex === index && deselect === true ? classes.setSelected : null} onClick={(event) => { channelOnClick(event, index, this.props.appName, channel) }} button id="channels" >
                                             <ListItemText classes={{ secondary: classes.listItemTextSecondary }} primary={channel.uri} secondary={channel.recipients.length > 0 ? "Recipients: " + channel.recipients : "Recipients: 0"} />
                                         </ListItem>
+
+
                                     ))
 
                             }
@@ -203,22 +213,7 @@ class Channels extends Component {
                         </List>
                     </Collapse>
                 </div>
-                <SockJsClient url='http://localhost:8080/websocket/'
-                    topics={[channelListener]}
 
-                    onConnect={() => {
-                        console.log("connected to websocket and listen to channel change on " + channelListener)
-                    }}
-
-                    onDisconnect={() => {
-                        console.log("disconnected to websocket listener on " + channelListener)
-                    }}
-
-                    onMessage={(msg) => {
-                        console.log(msg);
-                        this.getChannel();
-                    }}
-                    ref={(client) => { this.clientRef = client }} />
             </div >
         )
     }

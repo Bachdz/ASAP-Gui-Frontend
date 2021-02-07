@@ -10,7 +10,8 @@ import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
 import CheckIcon from '@material-ui/icons/Check';
 import Channels from './Channels';
-import Era from './Era';
+import axios from 'axios';
+
 import '../../../css/mainscreen/Apps.css';
 
 
@@ -30,6 +31,7 @@ const styles = theme => ({
 
 class Apps extends Component {
     state = {
+        currentEra: '',
         newApp: '',
         appName: '',
         open: true,
@@ -41,6 +43,17 @@ class Apps extends Component {
         showChannel: false
     }
 
+    componentDidMount() {
+        this.getEra();
+    }
+
+
+    getEra = () => {
+        axios.get('http://localhost:8080/api/v1/asap/era?peer=' + this.props.username + '&storage=' + this.props.appName)
+            .then(res => {
+                this.setState({ currentEra: res.data })
+            })
+    }
 
     render() {
         const { open, openAddApp, activateAddApp, newApp, selectedIndex, showChannel, deselect } = this.state;
@@ -134,13 +147,13 @@ class Apps extends Component {
                         </div>
                         : null}
                 </List>
-
+                <ListItem>
+                    <ListItemText classes={{ primary: classes.listItemText }} primary={"Current Era: " + this.state.currentEra} className='parentList' />
+                </ListItem>
                 {
                     showChannel ?
-                        <div>
-                            <Era appName={this.state.appName} username={this.props.username} />
-                            <Channels appName={this.state.appName} username={this.props.username} showMainScreen={this.props.showMainScreen} />
-                        </div>
+
+                        <Channels appName={this.state.appName} username={this.props.username} showMainScreen={this.props.showMainScreen} />
                         :
                         null
 

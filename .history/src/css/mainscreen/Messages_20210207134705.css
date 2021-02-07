@@ -15,10 +15,10 @@ b {
 
 #era {
 text-align: center;
-font-size: 16px;
-color:rgb(83, 83, 83);
+font-size: 20px;
+color:#333;
 font-weight: bold;
-border-bottom: 0.5mm solid;
+border-bottom: 0.5 solid;
 
 }
 .mess {

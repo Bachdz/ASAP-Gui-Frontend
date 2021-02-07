@@ -5,7 +5,7 @@ import Alert from '@material-ui/lab/Alert';
 import axios from 'axios';
 import SockJsClient from 'react-stomp';
 import { animateScroll } from "react-scroll";
-import Tooltip from '@material-ui/core/Tooltip';
+
 
 class Messages extends Component {
     state = {
@@ -87,28 +87,26 @@ class Messages extends Component {
                         <div className="mess-content" id="scroll-received">
                             <b>  {this.props.userName}</b>
                             {this.state.content.map((content) => (
-                                <Tooltip title={"ASAP-Chunk | Era " + content.era} placement="right">
 
-                                    <div id="self-mess">
+                                <div id="self-mess">
 
-                                        <div id="era">    Era {content.era}</div>
-
-
-
-                                        {content.messages.map((mess) => (
-                                            <p>
-                                                <p> {mess}</p>
-                                            </p>
+                                    <p>     Era {content.era}</p>
 
 
 
-                                        ))}
+                                    {content.messages.map((mess) => (
+                                        <p>
+                                            <p> {mess}</p>
+                                        </p>
+
+
+
+                                    ))}
 
 
 
 
-                                    </div>
-                                </Tooltip>
+                                </div>
                             ))
                             }
                         </div>
@@ -124,40 +122,12 @@ class Messages extends Component {
                         {this.state.received.length > 0 ?
                             <div className="received">
 
-                                {this.state.received.map((content) => (
+                                {this.state.received.map((mess) => (
                                     <div className="inbox-content" >
-                                        <b id="sender">{content.sender}</b>
+                                        <b id="sender">{mess.sender}</b>
 
-                                        {content.chunk.map((chunk) =>
-
-                                            <Tooltip title={"ASAP-Chunk | Era " + chunk.era} placement="left">
-                                                <div id="received-mess">
-
-
-
-                                                    <div id="era">    Era {chunk.era}</div>
-
-
-                                                    {chunk.messages.map((mess) => (
-                                                        <p>
-                                                            <p> {mess}</p>
-                                                        </p>
-
-
-
-                                                    ))}
-
-
-
-
-
-
-                                                </div>
-
-
-                                            </Tooltip>
-
-
+                                        {mess.messages.map((value) =>
+                                            <div id="received-mess">{value}</div>
 
                                         )}
 

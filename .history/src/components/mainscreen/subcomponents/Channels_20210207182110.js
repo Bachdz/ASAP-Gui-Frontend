@@ -57,7 +57,7 @@ class Channels extends Component {
         this.getChannel();
     }
 
-    getChannel() {
+    getChannel = () => {
         axios.get('http://localhost:8080/api/v1/asap/channels?peer=' + this.props.username + '&storage=' + this.props.appName)
             .then(res => this.setState({ channels: res.data }))
     }
@@ -88,7 +88,7 @@ class Channels extends Component {
     render() {
         const { open, openAddChannel, activateAddChannel, alertmsg, alertopen, alerttype, selectedIndex, deselect, channelSelected } = this.state;
         const { classes } = this.props;
-        const channelListener = "/app/channel/" + this.props.appName;
+        const channelListener = "/app/" + this.props.appName;
 
         const handleClick = (event, index) => {
             this.setState({ open: !this.state.open });
@@ -207,7 +207,7 @@ class Channels extends Component {
                     topics={[channelListener]}
 
                     onConnect={() => {
-                        console.log("connected to websocket and listen to channel change on " + channelListener)
+                        console.log("connected to websocket and listen to era change on " + channelListener)
                     }}
 
                     onDisconnect={() => {
@@ -216,7 +216,7 @@ class Channels extends Component {
 
                     onMessage={(msg) => {
                         console.log(msg);
-                        this.getChannel();
+                        this.getEra();
                     }}
                     ref={(client) => { this.clientRef = client }} />
             </div >

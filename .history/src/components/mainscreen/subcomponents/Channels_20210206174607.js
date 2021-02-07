@@ -12,10 +12,7 @@ import RemoveIcon from '@material-ui/icons/Remove';
 import CheckIcon from '@material-ui/icons/Check';
 import Snackbar from '@material-ui/core/Snackbar';
 import Alert from '@material-ui/lab/Alert';
-import Tooltip from '@material-ui/core/Tooltip';
 import '../../../css/mainscreen/Channels.css';
-import SockJsClient from 'react-stomp';
-
 
 const styles = theme => ({
     listItemText: {
@@ -55,13 +52,19 @@ class Channels extends Component {
 
     componentDidMount() {
         this.getChannel();
+        this.getChannel();
     }
 
-    getChannel() {
+    getChannel = () => {
         axios.get('http://localhost:8080/api/v1/asap/channels?peer=' + this.props.username + '&storage=' + this.props.appName)
             .then(res => this.setState({ channels: res.data }))
     }
 
+
+    getEra = () => {
+        axios.get('http://localhost:8080/api/v1/asap/era?peer=' + this.props.username + '&storage=' + this.props.appName)
+            .then(res => this.setState({ currentEra: res.data }))
+    }
 
 
 
@@ -88,7 +91,6 @@ class Channels extends Component {
     render() {
         const { open, openAddChannel, activateAddChannel, alertmsg, alertopen, alerttype, selectedIndex, deselect, channelSelected } = this.state;
         const { classes } = this.props;
-        const channelListener = "/app/channel/" + this.props.appName;
 
         const handleClick = (event, index) => {
             this.setState({ open: !this.state.open });
@@ -142,83 +144,73 @@ class Channels extends Component {
                         {alertmsg}
                     </Alert>
                 </Snackbar>
-                <div className="title">
+                <List>
 
-                    < ListItem button onClick={handleClick}>
-                        {open ? <ExpandLess /> : <ExpandMore />}
-                        <ListItemText classes={{ primary: classes.listItemText }} primary="Channels" className='parentList' />
-                    </ListItem>
+                    <div className="title">
 
+                        <ListItem>
+                            <ListItemText classes={{ primary: classes.listItemText }} primary={"Reached Era: " + this.state.currentEra} className='parentList' />
+                        </ListItem>
+
+                        < ListItem button onClick={handleClick}>
+                            {open ? <ExpandLess /> : <ExpandMore />}
+                            <ListItemText classes={{ primary: classes.listItemText }} primary="Channels" className='parentList' />
+                        </ListItem>
+                        {
+                            openAddChannel ?
+                                <RemoveIcon id="removeIcon" className="icon" onClick={toggleCreateNewChannel} />
+                                :
+                                <AddIcon id="addIcon" className="icon" onClick={toggleCreateNewChannel} />
+
+                        }
+
+
+                    </div>
                     {
                         openAddChannel ?
-                            <Tooltip title="Close">
-                                <RemoveIcon id="removeIcon" className="icon" onClick={toggleCreateNewChannel} />
-                            </Tooltip>
-                            :
-                            <Tooltip title="Add new channel">
-                                <AddIcon id="addIcon" className="icon" onClick={toggleCreateNewChannel} />
-                            </Tooltip>
+                            <div className="addChannel">
+                                <input autoComplete="off" type="text" id="addApp" name="channelname" className="input" placeholder="Enter channel uri" onChange={validateChannelUrl} />
+                                <input autoComplete="off" type="text" id="recipients" name="recipients" className="input" placeholder="Enter recipients, e.g. Alice,Bob" onChange={validateRecipients} />
+
+                                {
+                                    activateAddChannel ?
+                                        <CheckIcon id="checkicon-activate" className="icon" onClick={this.doCreateChannel} />
+                                        :
+
+                                        <CheckIcon id="checkicon-inactive" />
+
+                                }
+
+
+
+                            </div>
+                            : null
                     }
 
+                    <div className="channel-list">
+                        <Collapse in={open} timeout="auto" unmountOnExit>
+                            <List>
 
-                </div>
-                {
-                    openAddChannel ?
-                        <div className="addChannel">
-                            <input autoComplete="off" type="text" id="addApp" name="channelname" className="input" placeholder="Enter channel uri" onChange={validateChannelUrl} />
-                            <input autoComplete="off" type="text" id="recipients" name="recipients" className="input" placeholder="Enter recipients, e.g. Alice,Bob" onChange={validateRecipients} />
+                                {
+                                    this.state.channels.length === 0 ?
 
-                            {
-                                activateAddChannel ?
-                                    <CheckIcon id="checkicon-activate" className="icon" onClick={this.doCreateChannel} />
-                                    :
-
-                                    <CheckIcon id="checkicon-inactive" />
-
-                            }
+                                        <p className="information"> There are currently no channels avaiable</p>
+                                        :
+                                        this.state.channels.map((channel, index) => (
+                                            <ListItem selected={selectedIndex === index && deselect === true} className={selectedIndex === index && deselect === true ? classes.setSelected : null} onClick={(event) => { channelOnClick(event, index, this.props.appName, channel) }} button id="channels" >
+                                                <ListItemText classes={{ secondary: classes.listItemTextSecondary }} primary={channel.uri} secondary={channel.recipients.length > 0 ? "Recipients: " + channel.recipients : "Recipients: 0"} />
+                                            </ListItem>
 
 
+                                        ))
 
-                        </div>
-                        : null
-                }
+                                }
 
-                <div className="channel-list">
-                    <Collapse in={open} timeout="auto" unmountOnExit>
-                        <List>
+                            </List>
+                        </Collapse>
+                    </div>
+                </List>
 
-                            {
-                                this.state.channels.length === 0 ?
-
-                                    <p className="information"> There are currently no channels avaiable</p>
-                                    :
-                                    this.state.channels.map((channel, index) => (
-                                        <ListItem selected={selectedIndex === index && deselect === true} className={selectedIndex === index && deselect === true ? classes.setSelected : null} onClick={(event) => { channelOnClick(event, index, this.props.appName, channel) }} button id="channels" >
-                                            <ListItemText classes={{ secondary: classes.listItemTextSecondary }} primary={channel.uri} secondary={channel.recipients.length > 0 ? "Recipients: " + channel.recipients : "Recipients: 0"} />
-                                        </ListItem>
-                                    ))
-
-                            }
-
-                        </List>
-                    </Collapse>
-                </div>
-                <SockJsClient url='http://localhost:8080/websocket/'
-                    topics={[channelListener]}
-
-                    onConnect={() => {
-                        console.log("connected to websocket and listen to channel change on " + channelListener)
-                    }}
-
-                    onDisconnect={() => {
-                        console.log("disconnected to websocket listener on " + channelListener)
-                    }}
-
-                    onMessage={(msg) => {
-                        console.log(msg);
-                        this.getChannel();
-                    }}
-                    ref={(client) => { this.clientRef = client }} />
             </div >
         )
     }

@@ -10,7 +10,6 @@ import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
 import CheckIcon from '@material-ui/icons/Check';
 import Channels from './Channels';
-import Era from './Era';
 import '../../../css/mainscreen/Apps.css';
 
 
@@ -137,10 +136,8 @@ class Apps extends Component {
 
                 {
                     showChannel ?
-                        <div>
-                            <Era appName={this.state.appName} username={this.props.username} />
-                            <Channels appName={this.state.appName} username={this.props.username} showMainScreen={this.props.showMainScreen} />
-                        </div>
+
+                        <Channels appName={this.state.appName} username={this.props.username} showMainScreen={this.props.showMainScreen} />
                         :
                         null
 

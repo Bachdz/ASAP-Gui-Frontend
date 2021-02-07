@@ -87,7 +87,7 @@ class Messages extends Component {
                         <div className="mess-content" id="scroll-received">
                             <b>  {this.props.userName}</b>
                             {this.state.content.map((content) => (
-                                <Tooltip title={"ASAP-Chunk | Era " + content.era} placement="right">
+                                <Tooltip title={"ASAP-Chunk | Era " + content.era}>
 
                                     <div id="self-mess">
 
@@ -124,40 +124,12 @@ class Messages extends Component {
                         {this.state.received.length > 0 ?
                             <div className="received">
 
-                                {this.state.received.map((content) => (
+                                {this.state.received.map((mess) => (
                                     <div className="inbox-content" >
-                                        <b id="sender">{content.sender}</b>
+                                        <b id="sender">{mess.sender}</b>
 
-                                        {content.chunk.map((chunk) =>
-
-                                            <Tooltip title={"ASAP-Chunk | Era " + chunk.era} placement="left">
-                                                <div id="received-mess">
-
-
-
-                                                    <div id="era">    Era {chunk.era}</div>
-
-
-                                                    {chunk.messages.map((mess) => (
-                                                        <p>
-                                                            <p> {mess}</p>
-                                                        </p>
-
-
-
-                                                    ))}
-
-
-
-
-
-
-                                                </div>
-
-
-                                            </Tooltip>
-
-
+                                        {mess.messages.map((value) =>
+                                            <div id="received-mess">{value}</div>
 
                                         )}
 

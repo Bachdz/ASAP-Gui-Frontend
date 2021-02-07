@@ -87,7 +87,7 @@ class Messages extends Component {
                         <div className="mess-content" id="scroll-received">
                             <b>  {this.props.userName}</b>
                             {this.state.content.map((content) => (
-                                <Tooltip title={"ASAP-Chunk | Era " + content.era} placement="right">
+                                <Tooltip title={"ASAP-Chunk | Era " + content.era}>
 
                                     <div id="self-mess">
 
@@ -128,34 +128,26 @@ class Messages extends Component {
                                     <div className="inbox-content" >
                                         <b id="sender">{content.sender}</b>
 
-                                        {content.chunk.map((chunk) =>
+                                        {content.messages.map((mess) =>
+                                            <div id="received-mess">
+                                                {
 
-                                            <Tooltip title={"ASAP-Chunk | Era " + chunk.era} placement="left">
-                                                <div id="received-mess">
-
-
-
-                                                    <div id="era">    Era {chunk.era}</div>
-
-
-                                                    {chunk.messages.map((mess) => (
-                                                        <p>
-                                                            <p> {mess}</p>
-                                                        </p>
-
-
-
-                                                    ))}
+                                                    mess.map((obj) => (
+                                                        <div id="era">    Era {obj.era}</div>
 
 
 
 
 
 
-                                                </div>
+
+                                                    ))
+                                                }
+
+                                            </div>
 
 
-                                            </Tooltip>
+
 
 
 
