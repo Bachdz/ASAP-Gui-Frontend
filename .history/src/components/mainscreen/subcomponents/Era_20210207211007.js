@@ -3,6 +3,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import { withStyles } from '@material-ui/core/styles';
 import axios from 'axios';
+import SockJsClient from 'react-stomp';
 
 const styles = theme => ({
     listItemText: {
@@ -20,14 +21,6 @@ class Era extends Component {
 
     componentDidMount() {
         this.getEra();
-        this.interval = setInterval(async () => {
-            await this.getEra();
-        }, 1000); // every one second
-    }
-
-
-    componentWillUnmount() {
-        clearInterval(this.interval);
     }
 
     getEra() {
@@ -41,14 +34,31 @@ class Era extends Component {
 
     render() {
         const { classes } = this.props;
-
-
+        const eraListener = "/received/era/" + this.props.appName;
         return (
             <div>
                 <ListItem>
                     <ListItemText classes={{ primary: classes.listItemText }} primary={"Current Era: " + this.state.currentEra} className='parentList' />
                 </ListItem>
 
+
+
+                <SockJsClient url='http://localhost:8080/websocket/'
+                    topics={[eraListener]}
+
+                    onConnect={() => {
+                        console.log("connected to websocket and listen to era change on " + eraListener)
+                    }}
+
+                    onDisconnect={() => {
+                        console.log("disconnected to websocket listener on " + eraListener)
+                    }}
+
+                    onMessage={(msg) => {
+                        console.log(msg);
+                        this.getEra();
+                    }}
+                    ref={(client) => { this.clientRef = client }} />
             </div>
         )
     }

@@ -19,7 +19,6 @@ class Era extends Component {
 
 
     componentDidMount() {
-        this.getEra();
         this.interval = setInterval(async () => {
             await this.getEra();
         }, 1000); // every one second
