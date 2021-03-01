@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import '../../css/Terminal.css';
+import '../../css/fragments/Terminal.css';
 import { animateScroll } from "react-scroll";
 
 
@@ -33,7 +33,7 @@ export default class Terminal extends Component {
     }
 
     getLog = () => {
-        console.log("Asking for log data")
+        // console.log("Asking for log data")
         axios.get('http://localhost:8080/api/v1/asap/logdata')
             .then(res => {
                 if (res.data.length > this.state.log.length) {

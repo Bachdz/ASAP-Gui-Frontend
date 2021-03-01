@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 //import css-File
-import '../../css/mainscreen/Connection.css';
+import '../../css/dashboard/Connection.css';
 import GroupIcon from '@material-ui/icons/Group';
 
 class Connection extends Component {

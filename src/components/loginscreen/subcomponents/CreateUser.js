@@ -51,10 +51,10 @@ export class CreateUser extends Component {
                 <DialogContent id="dialog">
                     <DialogContentText id="dialog-text">
                         Please enter your name
-          </DialogContentText>
+                </DialogContentText>
                     <TextField
                        error={this.state.error}
-                     required
+                        required
                         autoFocus
                         margin="dense"
                         name="username"

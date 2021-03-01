@@ -1,12 +1,10 @@
 import React from 'react';
 import '../../../css/loginscreen/Peer.css';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
-// import { Redirect } from 'react-router-dom';
+import Arrow from '@material-ui/icons/ArrowForward';
 import { Link } from 'react-router-dom';
 
 function Peer(props) {
-
     if (props.peers.length > 0) {
         return (
             <div className="peer-container" id="scroll-peers">
@@ -21,27 +19,18 @@ function Peer(props) {
                                     peer: peer.name
                                 }
                             }}>
-                                <ArrowForwardIcon id="forward" />
+                                <Arrow id="forward" />
                             </Link>
                         </div>
 
                     ))
                 }
             </div>
-
-
         );
-
-
     } else {
         return (
             <h3>There are no peers available</h3>
         )
     }
 }
-
-
-
-
-
 export default Peer;

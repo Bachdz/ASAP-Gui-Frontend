@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 //import css-File
 import GroupIcon from '@material-ui/icons/Group';
-import '../../css/mainscreen/Connection.css';
+import '../../css/dashboard/Connection.css';
 
 class Connection extends Component {
     render() {
