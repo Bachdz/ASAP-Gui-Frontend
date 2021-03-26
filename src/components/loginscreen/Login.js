@@ -47,17 +47,16 @@ class Login extends Component {
 
     //remove all users
     removeAllUser = () => {
+
         axios.delete('http://localhost:8080/api/v1/asap/peers')
             .then(res => {
-                if (res.data === false) {
-                    this.setState({ alertopen: !this.state.alertopen, alertmsg: "Couldn't delete peers", alerttype: "error" });
-                } else if (res.data === true) {
-                    this.setState({ alertopen: !this.state.alertopen, alertmsg: "Deleted successfully ", alerttype: "success" });
-                    axios.get('http://localhost:8080/api/v1/asap/peers')
-                        .then(res => this.setState({ peers: res.data }))
+                if (res.data === true) {
+                    this.setState({ alertopen: !this.state.alertopen, alertmsg: "Deleted successfully ", alerttype: "success", peers: [] });
                 }
             }
-            )
+            ).catch(err => {
+                this.setState({ alertopen: !this.state.alertopen, alertmsg: "Couldn't delete peers", alerttype: "error" });
+            });
     }
 
     handleClose = (event, reason) => {

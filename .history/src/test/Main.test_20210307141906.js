@@ -73,18 +73,13 @@ describe('Main component test', () => {
         expect(wrapper.find(Messages).length).toEqual(0);
     });
 
-    /* 
-    *   Test rendering von Messages subcomponent 
-    */
-    it("mount Messages component when channel and app is selected", () => {
+    it("mount Messages component if channel and app is selected", () => {
         //prepare mock data for class 
         const mockLocation = { state: { peer: "testPeer" } };
-        const wrapper = shallow(<Main location={mockLocation} />);
-        //before
-        expect(wrapper.find(Messages).length).toEqual(0);
-        //mock set state 
+        const wrapper = shallow(<Main location={mockLocation} />)
+
+        //mock state 
         wrapper.setState({ channelSelected: true, appSelected: true })
-        //after
         expect(wrapper.find(Messages).length).toEqual(1);
     });
 

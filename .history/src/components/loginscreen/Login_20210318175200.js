@@ -13,24 +13,22 @@ import axios from 'axios';
 
 
 
-class Login extends React.Component {
+class Login extends Component {
     state = {
         peers: [],
         alertopen: false,
         alertmsg: '',
         alerttype: '',
-        consolelog: []
     }
 
 
-    getLog = () => {
-        axios.get('http://localhost:8080/api/v1/asap/logdata')
-            .then(res => this.setState({ consolelog: res.data }))
-    }
-    componentDidMount() {
+    getPeers() {
         axios.get('http://localhost:8080/api/v1/asap/peers')
-            .then(res => this.setState({ peers: res.data }))
-        this.getLog();
+            .then(res => this.setState({ peers: res.data }));
+    }
+
+    componentDidMount() {
+        this.getPeers();
     }
 
 
@@ -39,6 +37,7 @@ class Login extends React.Component {
         let url = 'http://localhost:8080/api/v1/asap/peer?name=' + userName;
         axios.post(url)
             .then(res => this.setState({ peers: [...this.state.peers, res.data] }, () => {
+                //automatic scroll to bottom of list
                 animateScroll.scrollToBottom({
                     containerId: "scroll-peers"
                 })
@@ -48,26 +47,21 @@ class Login extends React.Component {
 
     //remove all users
     removeAllUser = () => {
+
         axios.delete('http://localhost:8080/api/v1/asap/peers')
             .then(res => {
-                if (res.data === false) {
-                    this.setState({ alertopen: !this.state.alertopen, alertmsg: "Couldn't delete peers", alerttype: "error" }, () => this.getLog());
-
-                } else if (res.data === true) {
-                    this.setState({ alertopen: !this.state.alertopen, alertmsg: "Deleted successfully ", alerttype: "success" });
-                    axios.get('http://localhost:8080/api/v1/asap/peers')
-                        .then(res => this.setState({ peers: res.data }, () => this.getLog()))
-                }
-
-
-
+                console.log(res)
+                // if (res.statuscode === false) {
+                //     this.setState({ alertopen: !this.state.alertopen, alertmsg: "Couldn't delete peers", alerttype: "error" });
+                // } else if (res.data === true) {
+                //     this.setState({ alertopen: !this.state.alertopen, alertmsg: "Deleted successfully ", alerttype: "success" });
+                //     axios.get('http://localhost:8080/api/v1/asap/peers')
+                //         .then(res => this.setState({ peers: res.data }))
+                // }
             }
-
-
-            )
-
-
-
+            ).catch(err => {
+                alert('something went wrong. Could not contact the server!')
+            });
     }
 
     handleClose = (event, reason) => {
@@ -101,7 +95,7 @@ class Login extends React.Component {
 
                 </div>
                 <div className="console-login">
-                    <Terminal consolelog={this.state.consolelog} />
+                    <Terminal />
                 </div>
             </div>
 

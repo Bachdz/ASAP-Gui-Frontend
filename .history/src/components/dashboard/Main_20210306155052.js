@@ -47,6 +47,7 @@ class Main extends Component {
 
     doCreateApp = (newApp) => {
         let url = 'http://localhost:8080/api/v1/asap/app?peer=' + this.state.username + '&app=' + newApp;
+        console.log(url)
         axios.post(url)
             .then(res => {
                 res.data === null ?

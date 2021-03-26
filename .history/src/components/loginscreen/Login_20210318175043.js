@@ -13,7 +13,7 @@ import axios from 'axios';
 
 
 
-class Login extends React.Component {
+class Login extends Component {
     state = {
         peers: [],
         alertopen: false,
@@ -22,10 +22,13 @@ class Login extends React.Component {
     }
 
 
+    getPeers() {
+        axios.get('http://localhost:8080/api/v1/asap/peers')
+            .then(res => this.setState({ peers: res.data }));
+    }
 
     componentDidMount() {
-        axios.get('http://localhost:8080/api/v1/asap/peers')
-            .then(res => this.setState({ peers: res.data }))
+        this.getPeers();
     }
 
 
@@ -34,6 +37,7 @@ class Login extends React.Component {
         let url = 'http://localhost:8080/api/v1/asap/peer?name=' + userName;
         axios.post(url)
             .then(res => this.setState({ peers: [...this.state.peers, res.data] }, () => {
+                //automatic scroll to bottom of list
                 animateScroll.scrollToBottom({
                     containerId: "scroll-peers"
                 })
@@ -45,24 +49,16 @@ class Login extends React.Component {
     removeAllUser = () => {
         axios.delete('http://localhost:8080/api/v1/asap/peers')
             .then(res => {
-                if (res.data === false) {
-                    this.setState({ alertopen: !this.state.alertopen, alertmsg: "Couldn't delete peers", alerttype: "error" });
-
-                } else if (res.data === true) {
-                    this.setState({ alertopen: !this.state.alertopen, alertmsg: "Deleted successfully ", alerttype: "success" });
-                    axios.get('http://localhost:8080/api/v1/asap/peers')
-                        .then(res => this.setState({ peers: res.data }))
-                }
-
-
-
+                console.log(res)
+                // if (res.statuscode === false) {
+                //     this.setState({ alertopen: !this.state.alertopen, alertmsg: "Couldn't delete peers", alerttype: "error" });
+                // } else if (res.data === true) {
+                //     this.setState({ alertopen: !this.state.alertopen, alertmsg: "Deleted successfully ", alerttype: "success" });
+                //     axios.get('http://localhost:8080/api/v1/asap/peers')
+                //         .then(res => this.setState({ peers: res.data }))
+                // }
             }
-
-
             )
-
-
-
     }
 
     handleClose = (event, reason) => {

@@ -47,11 +47,9 @@ export default class Terminal extends Component {
             <div className="console" >
                 <div className="i-has-teh-code" id="scroll-terminal" >
                     {this.state.log.map((string) => (
-
                         <p>{string}</p>
                     ))
                     }
-
                 </div>
 
             </div>

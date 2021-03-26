@@ -49,16 +49,12 @@ describe('Start component test', () => {
         axiosSpy.mockClear();
     })
 
+    //Intergration test 
     it('test axios get reroute the application to path /login', () => {
-        //mock axios module
         jest.mock('axios');
-        // set response for the GET-call
         axios.get.mockResolvedValue({ status: 200, data: true });
-        //mock history element with jest
         const mProps = { history: { push: jest.fn() } };
-        //render component
         const wrapper = shallow(<Start {...mProps} />);
-        //find arrow element and simulte click
         const arrow = wrapper.find(Arrow);
         arrow.simulate('click'), () => {
             expect(mProps.history.push).toBeCalledWith('/login');

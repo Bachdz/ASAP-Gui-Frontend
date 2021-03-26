@@ -46,24 +46,21 @@ describe('CreatePeer component test', () => {
     })
 
 
-    it('the state error will be set to true if username equal blank ', () => {
-        //mock addUser function
+    it('call the state error will be set to true if username equal blank ', () => {
         const addUser = jest.fn();
-        // reander component with mocked function as props
         const wrapper = shallow(<CreateUser addUser={addUser} />)
-        // trigger function onsubmit
         wrapper.instance().onSubmit();
         expect(wrapper.state().error).toBe(true);
-        expect(addUser).toHaveBeenCalledTimes(0);
-    })
 
-    it('the state error will be set to false if username is provided, addUser function will be called', () => {
+    })
+    it('the state error will be set to false if username is provided ', () => {
         const addUser = jest.fn();
         const wrapper = shallow(<CreateUser addUser={addUser} />)
         wrapper.setState({ username: "testpeer" })
         wrapper.instance().onSubmit();
         expect(wrapper.state().error).toBe(false);
-        expect(addUser).toHaveBeenCalled;
+        // wrapper.instance().onSubmit();
+        // expect(wrapper.state().error).toBe(false);
     })
 
 

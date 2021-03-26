@@ -49,33 +49,33 @@ describe('Start component test', () => {
         axiosSpy.mockClear();
     })
 
-    it('test axios get reroute the application to path /login', () => {
-        //mock axios module
-        jest.mock('axios');
-        // set response for the GET-call
-        axios.get.mockResolvedValue({ status: 200, data: true });
-        //mock history element with jest
-        const mProps = { history: { push: jest.fn() } };
-        //render component
-        const wrapper = shallow(<Start {...mProps} />);
-        //find arrow element and simulte click
-        const arrow = wrapper.find(Arrow);
-        arrow.simulate('click'), () => {
-            expect(mProps.history.push).toBeCalledWith('/login');
-        };
-    });
-    // test('redirects to /login', async () => {
+    // //Intergration test 
+    // it('test axios get reroute the application to path /login', () => {
+    //     jest.mock('axios');
+    //     axios.get.mockResolvedValue({ status: 200, data: true });
+    //     // const mock = new MockAdapter(axios);
+    //     // mock.onGet("http://localhost:8080/api/v1/asap/start").reply(200, true);
+    //     const mProps = { history: { push: jest.fn() } };
+    //     const wrapper = shallow(<Start {...mProps} />);
+    //     const arrow = wrapper.find(Arrow);
+    //     // const axiosSpy = jest.spyOn(axios, 'get');
+    //     arrow.simulate('click'), () => {
+    //         expect(mProps.history.push).toBeCalledWith('/login');
+    //         expect(axiosSpy).toHaveBeenCalled();
+    //     };
+    // });
+    test('redirects to /login', async () => {
 
-    //     const pushSpy = jest.spyOn(useHistory(), 'push');
-    //     axios.get.mockResolvedValue({ data: true });
+        const pushSpy = jest.spyOn(useHistory(), 'push');
+        axios.get.mockResolvedValue({ data: true });
 
-    //     const wrapper = shallow(<Start />);
-    //     const button = wrapper.find(Arrow);
-    //     button.simulate('click');
-    //     await flushPromises();
-    //     // const mProps = { history: { push: jest.fn() } };
-    //     expect(pushSpy).toBeCalledWith('/login');
-    //     // expect(mProps.history.push).toBeCalledWith('/login');
+        const wrapper = shallow(<Start />);
+        const button = wrapper.find(Arrow);
+        button.simulate('click');
+        await flushPromises();
+        // const mProps = { history: { push: jest.fn() } };
+        expect(pushSpy).toBeCalledWith('/login');
+        // expect(mProps.history.push).toBeCalledWith('/login');
 
-    // })
+    })
 });
